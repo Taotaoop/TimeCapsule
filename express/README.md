@@ -1,4 +1,19 @@
-.
+# 数据库准备
+1. 下载mysql server
+2. 使用数据库 express_mysql_db,使用 soource /路径/express_mysql_db.sql
+3. 使用 cmd（管理员）
+`
+net start mysql
+`
+# 启动express
+1. npm run start
+
+
+
+
+
+# 项目结构
+
 ├── app.js
 ├── bin
 │   └── www

@@ -1,3 +1,10 @@
+<!-- 
+1. 上传模块需要处理多文件上传时候只取前三个符合格式的文件
+2. 上传错误文件格式不显示
+3. 点击上传按钮打包信息
+4. （可选）开关后面加问号说明
+5. （可选）全局尺寸调节
+1 -->
 <template>
   <div>
     <a-button type="primary" @click="showModal">Write Your Capsule</a-button>
@@ -5,10 +12,14 @@
       ref="modalRef"
       v-model:open="open"
       :wrap-style="{ overflow: 'hidden' }"
-      @ok="handleOk"
       width="1000px"
     >
+    <template #footer>
+        <a-button key="back" @click="handleCancel">Cancel</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">Submit</a-button>
+      </template>
       <a-form
+        ref="formRef"
         :model="formState"
         v-bind="layout"
         name="nest-messages"
@@ -46,11 +57,17 @@
         </a-form-item>
         <!-- Authorize to upload to timeline -->
         <a-form-item label="Submit to Timeline" name="authSubmit">
-          <a-switch
+          <a-space>
+            <a-switch
             v-model:checked="formState.user.SubmitToTimeline"
             checked-children="Y"
             un-checked-children="N"
           />
+          <a-tooltip>
+             <template #title>这里提示什么</template>
+             <QuestionCircleOutlined />
+          </a-tooltip>
+          </a-space>
         </a-form-item>
         <a-upload-dragger
           v-model:fileList="fileList"
@@ -100,18 +117,31 @@
 <script setup>
 import { ref, computed, watch, watchEffect, reactive } from "vue";
 import { message } from "ant-design-vue";
-import { InboxOutlined, InfoCircleOutlined } from "@ant-design/icons-vue";
+import { InboxOutlined, InfoCircleOutlined,QuestionCircleOutlined} from "@ant-design/icons-vue";
 import { useDraggable } from "@vueuse/core";
+//Dialog Module 
 const open = ref(false);
 const modalTitleRef = ref(null);
 const showModal = () => {
   open.value = true;
 };
 const { x, y, isDragging } = useDraggable(modalTitleRef);
+const formRef = ref();
 const handleOk = (e) => {
-  console.log(e);
-  open.value = false;
+  formRef.value
+    .validate()
+    .then(()=>{
+      console.log(formState);
+      // Clear form data before cancel
+      formRef.value.resetFields()  
+      open.value = false
+    })
+    .catch(console.log)
 };
+const handleCancel = ()=>{
+  formRef.value.resetFields()
+  open.value = false
+}
 const startX = ref(0);
 const startY = ref(0);
 const startedDrag = ref(false);
@@ -189,17 +219,21 @@ const formState = reactive({
     SubmitToTimeline: true,
   },
 });
+
 //Upload Module
 const fileList = ref([]);
 const handleChange = (info) => {
+  console.log(info, fileList.value)
   const status = info.file.status;
   if (status !== "uploading") {
     console.log(info.file, info.fileList);
   }
   if (status === "done") {
+    // Callback on Success
     message.success(`${info.file.name} file uploaded successfully.`);
   } else if (status === "error") {
     message.error(`${info.file.name} file upload failed.`);
+    fileList.value = fileList.value.filter(file=>file.status !== 'error')
   }
 };
 function handleDrop(e) {
@@ -215,18 +249,22 @@ const beforeUpload = (file) => {
   ];
   const valideFileType = acceptedFileType.includes(file.type);
   if (!valideFileType) {
+
     message.error(`${file.name} is not a supported file type`);
-    reject(file);
+    // reject(file);
   }
   const sizeLimit = 5;
   const isSmallerThanLimit = file.size / 1024 / 1024 < sizeLimit;
   if (!isSmallerThanLimit) {
     message.error(`Image must smaller than ${sizeLimit} MB!`);
-    reject(file);
+    // reject(file);
   }
-  return valideFileType || isSmallerThanLimit || Upload.LIST_IGNORE;
+  console.log(valideFileType || isSmallerThanLimit)
+
+
+  return (valideFileType || isSmallerThanLimit) || Upload.LIST_IGNORE;
 };
-//
+//调试
 const onFinish = (values) => {
   console.log("Success:", values);
 };

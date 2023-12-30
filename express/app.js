@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cors = require('cors');  //这个包用来处理跨域，上面没说到
-var cookieParser = require('cookie-parser');
+const formidable = require("express-formidable");
 var logger = require('morgan');
 
 
@@ -28,11 +28,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-
+app.use(formidable());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/api", usersRouter);

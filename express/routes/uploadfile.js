@@ -1,17 +1,14 @@
 var express = require("express");
 var router = express.Router();
 var multer = require("multer");
-const fs = require("fs");
-let path = require("path");
 
 /* ×??á???§ */
 router.post("/file-upload", uploadFile, (req, res) => {
-
+  console.log(req.body);
   res.send("文件上传成功");
 });
 
 function uploadFile(req, res, next) {
-
     var storage = multer.diskStorage({
       //设置上传后文件路径，uploads文件夹会自动创建。
       destination: function (req, file, cb) {
@@ -35,14 +32,13 @@ function uploadFile(req, res, next) {
     storage: storage,
   }).any();
 
-
   upload(req, res, (err) => {
     //打印结果看下面的截图
     console.log(req.files[0]);
     if (err) {
       res.send("err:" + err);
     } else {
-      next();
+      res.send(req.fields);
     }
   });
 }

@@ -14,6 +14,7 @@ require(process.cwd() + '/common/utils.js');
 
 // router
 var usersRouter = require('./routes/users');
+var uploadfileRouter = require("./routes/uploadfile");
 
 // cors 默认配置就是下面这几项，完全可以写成app.use(cors());
 app.use(cors({
@@ -34,7 +35,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/api/users", usersRouter);
+app.use("/api", usersRouter);
+app.use("/api", uploadfileRouter);
+
 
 
 module.exports = app;

@@ -6,13 +6,22 @@ USE express_mysql_db;
 
 # 创建 user 表
 CREATE TABLE `user` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(20) NOT NULL,
-    `password` VARCHAR(60) NOT NULL,
+    `email` VARCHAR(60) NOT NULL,
+    PRIMARY KEY (`email`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#储存文件
+CREATE TABLE `file` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(20) NOT NULL,
+    `filetype` VARCHAR(60) NOT NULL,
+    `filepath` VARCHAR(60) NOT NULL,
     PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # 插入三条测试用数据
-INSERT INTO user (`name`, `password`) VALUES ('user1', 'password1');
-INSERT INTO user (`name`, `password`) VALUES ('user2', 'password2');
-INSERT INTO user (`name`, `password`) VALUES ('user3', 'password3');
+INSERT INTO user (`name`, `email`) VALUES ('user1', 'xxx.outlook.com');
+INSERT INTO user (`name`, `email`) VALUES ('user2', 'xy.outlook.com');
+INSERT INTO file (`email`, `filetype`,`filepath`) VALUES ('user2', 'xy.outlook.com');
+

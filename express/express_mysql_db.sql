@@ -23,5 +23,5 @@ CREATE TABLE `file` (
 # 插入三条测试用数据
 INSERT INTO user (`name`, `email`) VALUES ('user1', 'xxx.outlook.com');
 INSERT INTO user (`name`, `email`) VALUES ('user2', 'xy.outlook.com');
-INSERT INTO file (`email`, `filetype`,`filepath`) VALUES ('user2', 'xy.outlook.com');
+INSERT INTO file (`email`, `filetype`) VALUES ('user2', 'xy.outlook.com');
 

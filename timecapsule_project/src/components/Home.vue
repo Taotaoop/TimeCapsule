@@ -1,9 +1,7 @@
 <!-- 
-1. 上传模块需要处理多文件上传时候只取前三个符合格式的文件
-2. 上传错误文件格式不显示
-3. 点击上传按钮打包信息
-4. （可选）开关后面加问号说明
-5. （可选）全局尺寸调节
+1. 上传多个时候后端依旧会接收
+2. 和表单一起上传
+3. 删除函数
 1 -->
 <template>
   <div>
@@ -74,7 +72,7 @@
           name="file"
           :multiple="true"
           :max-count="3"
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          action="http://localhost:3000/api/file-upload"
           :before-upload="beforeUpload"
           @change="handleChange"
           @drop="handleDrop"
@@ -116,9 +114,9 @@
 
 <script setup>
 import { ref, computed, watch, watchEffect, reactive } from "vue";
-import { message } from "ant-design-vue";
+import { message, Upload } from "ant-design-vue";
 import { InboxOutlined, InfoCircleOutlined,QuestionCircleOutlined} from "@ant-design/icons-vue";
-import { useDraggable } from "@vueuse/core";
+import { onKeyDown, useDraggable } from "@vueuse/core";
 //Dialog Module 
 const open = ref(false);
 const modalTitleRef = ref(null);
@@ -130,8 +128,12 @@ const formRef = ref();
 const handleOk = (e) => {
   formRef.value
     .validate()
-    .then(()=>{
-      console.log(formState);
+    .then((formData)=>{
+      const data = {
+        ...formData,
+        fileList: fileList.value.map(item => item.response)
+      }
+      console.log(data);
       // Clear form data before cancel
       formRef.value.resetFields()  
       open.value = false
@@ -223,12 +225,15 @@ const formState = reactive({
 //Upload Module
 const fileList = ref([]);
 const handleChange = (info) => {
-  console.log(info, fileList.value)
+  // console.log(info, fileList.value)
+  console.log(info)
   const status = info.file.status;
+  // info 
   if (status !== "uploading") {
-    console.log(info.file, info.fileList);
+    // console.log(info.file, info.fileList);
   }
   if (status === "done") {
+    console.log(info)
     // Callback on Success
     message.success(`${info.file.name} file uploaded successfully.`);
   } else if (status === "error") {
@@ -236,8 +241,11 @@ const handleChange = (info) => {
     fileList.value = fileList.value.filter(file=>file.status !== 'error')
   }
 };
+
 function handleDrop(e) {
-  console.log(e);
+  console.log("At dropping");
+  // console.log("Droping:"+ e);
+  // console.log("Filelist" + fileList);
 }
 const beforeUpload = (file) => {
   const acceptedFileType = [
@@ -247,11 +255,14 @@ const beforeUpload = (file) => {
     "application/x-bzip",
     "application/zip",
   ];
+  //问题： 验证失败依旧现实
   const valideFileType = acceptedFileType.includes(file.type);
   if (!valideFileType) {
-
     message.error(`${file.name} is not a supported file type`);
+    //不加这个依旧上传
+    // this.LIST_IGNORE;
     // reject(file);
+    return Upload.LIST_IGNORE;
   }
   const sizeLimit = 5;
   const isSmallerThanLimit = file.size / 1024 / 1024 < sizeLimit;
@@ -259,8 +270,10 @@ const beforeUpload = (file) => {
     message.error(`Image must smaller than ${sizeLimit} MB!`);
     // reject(file);
   }
+  
   console.log(valideFileType || isSmallerThanLimit)
-
+  //问题：限制上传数量
+  console.log(fileList.value.length);
 
   return (valideFileType || isSmallerThanLimit) || Upload.LIST_IGNORE;
 };

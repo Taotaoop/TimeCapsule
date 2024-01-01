@@ -3,8 +3,6 @@ var router = express.Router();
 
 router.post("/uploadform", function (req, res,) {
   console.log(req.body);
-  console.log(req.params);
-  console.log(req.params);
   res.send("x");
 
   //   const storeData = `select * from user`;

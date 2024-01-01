@@ -2,21 +2,23 @@ var express = require("express");
 var router = express.Router();
 var multer = require("multer");
 
-/* ¡Á??¨¢???¡ì */
+/* ï¿½ï¿½??ï¿½ï¿½???ï¿½ï¿½ */
 router.post("/file-upload", uploadFile, (req, res) => {
-
-  res.send("ÎÄ¼þÉÏ´«³É¹¦");
+  console.log(req.body);
+  res.send("ï¿½Ä¼ï¿½ï¿½Ï´ï¿½ï¿½É¹ï¿½");
 });
 
 function uploadFile(req, res, next) {
+  var fileFullName
     var storage = multer.diskStorage({
-      //ÉèÖÃÉÏ´«ºóÎÄ¼þÂ·¾¶£¬uploadsÎÄ¼þ¼Ð»á×Ô¶¯´´½¨¡£
+      //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½ï¿½ï¿½uploadsï¿½Ä¼ï¿½ï¿½Ð»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       destination: function (req, file, cb) {
         cb(null, "./file");
       },
-      //¸øÉÏ´«ÎÄ¼þÖØÃüÃû£¬»ñÈ¡Ìí¼Óºó×ºÃû
+      //ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Óºï¿½×ºï¿½ï¿½
       filename: function (req, file, cb) {
         var fileFormat = file.originalname.split(".");
+        fileFullName = 
         cb(
           null,
           file.originalname.split('.')[0] +
@@ -33,12 +35,12 @@ function uploadFile(req, res, next) {
   }).any();
 
   upload(req, res, (err) => {
-    //´òÓ¡½á¹û¿´ÏÂÃæµÄ½ØÍ¼
+    //ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½Í¼
     console.log(req.files[0]);
     if (err) {
       res.send("err:" + err);
     } else {
-      res.send(req.fields);
+      res.send(fileFullName);
     }
   });
 }

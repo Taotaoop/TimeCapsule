@@ -216,7 +216,6 @@ const formState = reactive({
   user: {
     name: "",
     email: "",
-    dateUnlock: undefined,
     capsuleText: "",
     SubmitToTimeline: true,
   },
@@ -255,20 +254,17 @@ const beforeUpload = (file) => {
     "application/x-bzip",
     "application/zip",
   ];
-  //问题： 验证失败依旧现实
+  
   const valideFileType = acceptedFileType.includes(file.type);
   if (!valideFileType) {
     message.error(`${file.name} is not a supported file type`);
-    //不加这个依旧上传
-    // this.LIST_IGNORE;
-    // reject(file);
     return Upload.LIST_IGNORE;
   }
   const sizeLimit = 5;
   const isSmallerThanLimit = file.size / 1024 / 1024 < sizeLimit;
   if (!isSmallerThanLimit) {
     message.error(`Image must smaller than ${sizeLimit} MB!`);
-    // reject(file);
+    return Upload.LIST_IGNORE;
   }
   
   console.log(valideFileType || isSmallerThanLimit)

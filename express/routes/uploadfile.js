@@ -4,7 +4,7 @@ var multer = require("multer");
 
 /* ×??á???§ */
 router.post("/file-upload", uploadFile, (req, res) => {
-  console.log(req.body);
+
   res.send("文件上传成功");
 });
 

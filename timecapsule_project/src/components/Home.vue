@@ -1,8 +1,3 @@
-<!-- 
-1. 上传多个时候后端依旧会接收
-2. 和表单一起上传
-3. 删除函数
-1 -->
 <template>
   <div>
     <a-button type="primary" @click="showModal">Write Your Capsule</a-button>
@@ -12,9 +7,15 @@
       :wrap-style="{ overflow: 'hidden' }"
       width="1000px"
     >
-    <template #footer>
+      <template #footer>
         <a-button key="back" @click="handleCancel">Cancel</a-button>
-        <a-button key="submit" type="primary"  @click="handleOk">Submit</a-button>
+        <a-button
+          :disabled="disabled"
+          key="submit"
+          type="primary"
+          @click="handleOk"
+          >Submit</a-button
+        >
       </template>
       <a-form
         ref="formRef"
@@ -54,17 +55,22 @@
           />
         </a-form-item>
         <!-- Authorize to upload to timeline -->
-        <a-form-item label="Submit to Timeline" name="authSubmit">
+        <a-form-item
+          :name="['user', 'SubmitToTimeline']"
+          label="Submit to Timeline"
+        >
           <a-space>
             <a-switch
-            v-model:checked="formState.user.SubmitToTimeline"
-            checked-children="Y"
-            un-checked-children="N"
-          />
-          <a-tooltip>
-             <template #title>这里提示什么</template>
-             <QuestionCircleOutlined />
-          </a-tooltip>
+              v-model:checked="formState.user.SubmitToTimeline"
+              checked-children="Y"
+              un-checked-children="N"
+            />
+            <a-tooltip>
+              <template #title
+                >We will display your timecapsule on the timeline!</template
+              >
+              <QuestionCircleOutlined style="font-size: 18px; position: relative; top: 3px;" />
+            </a-tooltip>
           </a-space>
         </a-form-item>
         <a-upload-dragger
@@ -97,7 +103,6 @@
         style="width: 100%"
       />
     </a-form-item> -->
-
       <template #title>
         <div ref="modalTitleRef" style="width: 100%; cursor: move">
           Write Your Own Timecapsule
@@ -115,10 +120,15 @@
 <script setup>
 import { ref, computed, watch, watchEffect, reactive } from "vue";
 import { message, Upload } from "ant-design-vue";
-import { InboxOutlined, InfoCircleOutlined,QuestionCircleOutlined} from "@ant-design/icons-vue";
+import {
+  InboxOutlined,
+  InfoCircleOutlined,
+  QuestionCircleOutlined,
+} from "@ant-design/icons-vue";
 import { onKeyDown, useDraggable } from "@vueuse/core";
 import axios from "axios";
-//Dialog Module 
+import { uploadform } from "../api/writeTimecap";
+//Dialog Module
 const open = ref(false);
 const modalTitleRef = ref(null);
 const showModal = () => {
@@ -129,28 +139,23 @@ const formRef = ref();
 const handleOk = (e) => {
   formRef.value
     .validate()
-    .then((formData)=>{
+    .then((formData) => {
       const data = {
         ...formData,
-        fileList: fileList.value.map(item => item.response)
-      }
+        fileList: fileList.value.map((item) => item.response),
+      };
       console.log(data);
       // Clear form data before cancel
-      formRef.value.resetFields()  
-      open.value = false
-      return axios({
-            url: 'http://localhost:3000/api/uploadform',
-            method: 'post', 
-            headers: { 'content-type': 'application/json' },
-            data: data
-        });
+      formRef.value.resetFields();
+      open.value = false;
+      return uploadform(data);
     })
-    .catch(console.log)
+    .catch(console.log);
 };
-const handleCancel = ()=>{
-  formRef.value.resetFields()
-  open.value = false
-}
+const handleCancel = () => {
+  formRef.value.resetFields();
+  open.value = false;
+};
 const startX = ref(0);
 const startY = ref(0);
 const startedDrag = ref(false);
@@ -223,28 +228,30 @@ const formState = reactive({
   user: {
     name: "1",
     email: "1@qq.com",
-    capsuleText: "",
+    capsuleText: "Hello",
     SubmitToTimeline: true,
   },
 });
+
+console.log(formState);
 
 //Upload Module
 const fileList = ref([]);
 const handleChange = (info) => {
   // console.log(info, fileList.value)
-  console.log(info)
+  console.log(info);
   const status = info.file.status;
-  // info 
+  // info
   if (status !== "uploading") {
     // console.log(info.file, info.fileList);
   }
   if (status === "done") {
-    console.log(info)
+    console.log(info);
     // Callback on Success
     message.success(`${info.file.name} file uploaded successfully.`);
   } else if (status === "error") {
     message.error(`${info.file.name} file upload failed.`);
-    fileList.value = fileList.value.filter(file=>file.status !== 'error')
+    fileList.value = fileList.value.filter((file) => file.status !== "error");
   }
 };
 
@@ -261,7 +268,7 @@ const beforeUpload = (file) => {
     "application/x-bzip",
     "application/zip",
   ];
-  
+
   const valideFileType = acceptedFileType.includes(file.type);
   if (!valideFileType) {
     message.error(`${file.name} is not a supported file type`);
@@ -273,16 +280,16 @@ const beforeUpload = (file) => {
     message.error(`Image must smaller than ${sizeLimit} MB!`);
     return Upload.LIST_IGNORE;
   }
-  
-  console.log(valideFileType || isSmallerThanLimit)
+
+  console.log(valideFileType || isSmallerThanLimit);
   //问题：限制上传数量
   // console.log(fileList.value.length);
-  if(fileList.value.length >= 3){
+  if (fileList.value.length >= 3) {
     message.error(`${file.name} upload failed, Maximum 3 file`);
     return Upload.LIST_IGNORE;
   }
 
-  return (valideFileType || isSmallerThanLimit) || Upload.LIST_IGNORE;
+  return valideFileType || isSmallerThanLimit || Upload.LIST_IGNORE;
 };
 //调试
 const onFinish = (values) => {
@@ -291,4 +298,8 @@ const onFinish = (values) => {
 const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
+//submit disable without required input
+const disabled = computed(() => {
+  return !(formState.user.name && formState.user.email);
+});
 </script>

@@ -14,7 +14,7 @@
     >
     <template #footer>
         <a-button key="back" @click="handleCancel">Cancel</a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">Submit</a-button>
+        <a-button key="submit" type="primary"  @click="handleOk">Submit</a-button>
       </template>
       <a-form
         ref="formRef"
@@ -117,6 +117,7 @@ import { ref, computed, watch, watchEffect, reactive } from "vue";
 import { message, Upload } from "ant-design-vue";
 import { InboxOutlined, InfoCircleOutlined,QuestionCircleOutlined} from "@ant-design/icons-vue";
 import { onKeyDown, useDraggable } from "@vueuse/core";
+import axios from "axios";
 //Dialog Module 
 const open = ref(false);
 const modalTitleRef = ref(null);
@@ -137,6 +138,12 @@ const handleOk = (e) => {
       // Clear form data before cancel
       formRef.value.resetFields()  
       open.value = false
+      return axios({
+            url: 'http://localhost:3000/api/uploadform',
+            method: 'post', 
+            headers: { 'content-type': 'application/json' },
+            data: data
+        });
     })
     .catch(console.log)
 };
@@ -214,8 +221,8 @@ const validateMessages = {
 };
 const formState = reactive({
   user: {
-    name: "",
-    email: "",
+    name: "1",
+    email: "1@qq.com",
     capsuleText: "",
     SubmitToTimeline: true,
   },
@@ -269,7 +276,11 @@ const beforeUpload = (file) => {
   
   console.log(valideFileType || isSmallerThanLimit)
   //问题：限制上传数量
-  console.log(fileList.value.length);
+  // console.log(fileList.value.length);
+  if(fileList.value.length >= 3){
+    message.error(`${file.name} upload failed, Maximum 3 file`);
+    return Upload.LIST_IGNORE;
+  }
 
   return (valideFileType || isSmallerThanLimit) || Upload.LIST_IGNORE;
 };

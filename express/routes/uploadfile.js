@@ -19,13 +19,13 @@ function uploadFile(req, res, next) {
       filename: function (req, file, cb) {
         var fileFormat = file.originalname.split(".");
         fileFullName = 
+        file.originalname.split('.')[0] +
+          "-" +
+          Date.now() +
+          "." +
+          fileFormat[fileFormat.length - 1]
         cb(
-          null,
-          file.originalname.split('.')[0] +
-            "-" +
-            Date.now() +
-            "." +
-            fileFormat[fileFormat.length - 1]
+          null, fileFullName
         );
       },
     }); 

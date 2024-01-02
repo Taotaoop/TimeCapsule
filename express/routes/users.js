@@ -1,15 +1,25 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-/* ×¢²áÓÃ»§ */
 router.post("/createuser", function (req, res) {
-  const userNameIsOnlySql = `select * from user`;
-  db.query(userNameIsOnlySql, (err, users) => {
+
+ var storeData =
+   "INSERT INTO user (name, email) VALUES (?,?)";
+ var storeData_Params = [
+   req.body.user.name,
+   req.body.user.email,
+ ];
+ db.query(storeData, storeData_Params, (err) => {
+   if (err) {
+     res.send(err);
+   }
+ });
+  const usetest = "select * from user";
+  db.query(usetest, (err, user) => {
     if (err) {
-      res.send("query error");
+      res.send(err);
     } else {
-      // ? MySQL ???????????
-      res.send(users);
+      res.send(user);
     }
   });
   

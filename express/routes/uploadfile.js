@@ -2,44 +2,41 @@ var express = require("express");
 var router = express.Router();
 var multer = require("multer");
 
-/* ��??��???�� */
 router.post("/file-upload", uploadFile, (req, res) => {
-  console.log(req.body);
-  res.send("�ļ��ϴ��ɹ�");
+  res.send("sucess");
 });
 
 function uploadFile(req, res, next) {
-  var fileFullName
-    var storage = multer.diskStorage({
-      //�����ϴ����ļ�·����uploads�ļ��л��Զ�������
-      destination: function (req, file, cb) {
-        cb(null, "./file");
-      },
-      //���ϴ��ļ�����������ȡ���Ӻ�׺��
-      filename: function (req, file, cb) {
-        var fileFormat = file.originalname.split(".");
-        fileFullName = 
-        file.originalname.split('.')[0] +
-          "-" +
-          Date.now() +
-          "." +
-          fileFormat[fileFormat.length - 1]
-        cb(
-          null, fileFullName
-        );
-      },
-    }); 
-  
+  var fileFullName;
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "./file");
+    },
+
+    filename: function (req, file, cb) {
+      file.originalname = Buffer.from(file.originalname, "latin1").toString(
+        "utf8"
+      );
+      var fileFormat = file.originalname.split(".");
+      fileFullName =
+        file.originalname.split(".")[0] +
+        "-" +
+        Date.now() +
+        "." +
+        fileFormat[fileFormat.length - 1];
+      cb(null, fileFullName);
+    },
+  });
+
   let upload = multer({
     storage: storage,
   }).any();
 
   upload(req, res, (err) => {
-    //��ӡ���������Ľ�ͼ
-    console.log(req.files[0]);
     if (err) {
       res.send("err:" + err);
     } else {
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
       res.send(fileFullName);
     }
   });

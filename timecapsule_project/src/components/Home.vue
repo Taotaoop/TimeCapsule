@@ -1,5 +1,6 @@
 <template>
   <div>
+    <a-button @click="goToLogin">Go to Login</a-button>
     <a-button type="primary" @click="showModal">Write Your Capsule</a-button>
     <a-modal
       ref="modalRef"
@@ -58,20 +59,40 @@
         <a-form-item
           :name="['user', 'SubmitToTimeline']"
           label="Submit to Timeline"
+          class="timeline-option"
         >
-          <a-space>
-            <a-switch
-              v-model:checked="formState.user.SubmitToTimeline"
-              checked-children="Y"
-              un-checked-children="N"
-            />
-            <a-tooltip>
-              <template #title
-                >We will display your timecapsule on the timeline!</template
-              >
-              <QuestionCircleOutlined style="font-size: 18px; position: relative; top: 3px;" />
-            </a-tooltip>
-          </a-space>
+          <div class="timeline-controls">
+            <a-space>
+              <a-switch
+                v-model:checked="formState.user.SubmitToTimeline"
+                checked-children="Y"
+                un-checked-children="N"
+              />
+              <a-tooltip>
+                <template #title
+                  >We will display your timecapsule on the public
+                  timeline!</template
+                >
+                <QuestionCircleOutlined
+                  style="font-size: 18px; position: relative; top: 3px"
+                />
+              </a-tooltip>
+            </a-space>
+          </div>
+        </a-form-item>
+        <a-form-item
+          v-if="formState.user.SubmitToTimeline"
+          :name="['user', 'publishDate']"
+          label="Publish Date"
+        >
+          <a-date-picker
+            v-if="formState.user.SubmitToTimeline"
+            v-model:value="formState.user.publishDate"
+            type="date"
+            placeholder="Pick a date"
+            format="YYYY-MM-DD"
+            value-format="YYYY-MM-DD"
+          />
         </a-form-item>
         <a-upload-dragger
           v-model:fileList="fileList"
@@ -94,15 +115,6 @@
           </p>
         </a-upload-dragger>
       </a-form>
-      <!-- <a-form-item label="Unlock time" required name="dateUnlock">
-      <a-date-picker
-        v-model:value="formState.dateUnlock"
-        show-time
-        type="date"
-        placeholder="Pick a date"
-        style="width: 100%"
-      />
-    </a-form-item> -->
       <template #title>
         <div ref="modalTitleRef" style="width: 100%; cursor: move">
           Write Your Own Timecapsule
@@ -128,6 +140,7 @@ import {
 import { onKeyDown, useDraggable } from "@vueuse/core";
 import axios from "axios";
 import { uploadform } from "../api/writeTimecap";
+import { useRouter } from "vue-router";
 //Dialog Module
 const open = ref(false);
 const modalTitleRef = ref(null);
@@ -229,7 +242,8 @@ const formState = reactive({
     name: "1",
     email: "1@qq.com",
     capsuleText: "Hello",
-    SubmitToTimeline: true,
+    SubmitToTimeline: false,
+    publishDate: null,
   },
 });
 
@@ -298,8 +312,24 @@ const onFinish = (values) => {
 const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
+const router = useRouter();
+
+function goToLogin() {
+  router.push({ name: "Login" });
+}
 //submit disable without required input
 const disabled = computed(() => {
   return !(formState.user.name && formState.user.email);
 });
 </script>
+
+<style scoped>
+.timeline-options {
+  display: flex;
+  justify-content: flex-end; /* 保持内容在右侧 */
+}
+
+.timeline-controls {
+  display: flex;
+}
+</style>

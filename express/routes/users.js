@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
-
+//�����û�
 router.post("/createuser", function (req, res) {
-
  var storeData =
    "INSERT INTO user (name, email) VALUES (?,?)";
  var storeData_Params = [
@@ -12,9 +11,15 @@ router.post("/createuser", function (req, res) {
  db.query(storeData, storeData_Params, (err) => {
    if (err) {
      res.send(err);
+   }else{
+    res.send("sucess");
    }
  });
-  const usetest = "select * from user";
+  
+});
+//��ȡ���е��û��б�,100��
+router.get("/userlist",function(req,res){
+  const usetest = "select * from user limit 100";
   db.query(usetest, (err, user) => {
     if (err) {
       res.send(err);
@@ -22,8 +27,6 @@ router.post("/createuser", function (req, res) {
       res.send(user);
     }
   });
-  
 });
-
 module.exports = router;
 

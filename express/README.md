@@ -1,40 +1,43 @@
-# Êı¾İ¿â×¼±¸
-1. ÏÂÔØmysql server
-2. Ê¹ÓÃÊı¾İ¿â express_mysql_db,Ê¹ÓÃ soource /Â·¾¶/express_mysql_db.sql
-3. Ê¹ÓÃ cmd£¨¹ÜÀíÔ±£©
+# æ•°æ®åº“å‡†å¤‡
+1. ä¸‹è½½mysql server
+2. ä½¿ç”¨æ•°æ®åº“ express_mysql_db,ä½¿ç”¨ soource /è·¯å¾„/express_mysql_db.sql
+3. ä½¿ç”¨ cmdï¼ˆç®¡ç†å‘˜ï¼‰
 `
 net start mysql
 `
-# Æô¶¯express
+# å¯åŠ¨express
 1. npm run start
 
+# æ¥å£
+/createuser åˆ›å»ºç”¨æˆ·
+/userlist è·å–æ‰€æœ‰çš„ç”¨æˆ·åˆ—è¡¨,100æ¡
+/uploadform ä¸Šä¼ è¡¨å•
+/gettimeline è·å–timeline çš„æ•°æ®ï¼Œ50æ¡
+/filelist è·å–æ‰€æœ‰çš„æ–‡ä»¶åˆ—è¡¨,100æ¡
 
+# é¡¹ç›®ç»“æ„
 
-
-
-# ÏîÄ¿½á¹¹
-
-©À©¤©¤ app.js
-©À©¤©¤ bin
-©¦   ©¸©¤©¤ www
-+©À©¤©¤ common #ÏîÄ¿¹«ÓÃÎÄ¼ş£¬sqlÅäÖÃÎÄ¼şÒÔ¼°Ò»Ğ©¹«ÓÃ·½·¨¡£
-+©¦   ©À©¤©¤ config.js #Êı¾İ¿âÅäÖÃÎÄ¼ş
-+©¦   ©À©¤©¤ sql.js #Á¬½ÓÊı¾İ¿â
-+©¦   ©¸©¤©¤ utils.js #¹«ÓÃ·½·¨
-+©À©¤©¤ controllers #¿ØÖÆ²ã£¬Á¬½ÓÊı¾İÄ£ĞÍÓëÂ·ÓÉ²ã
-+©¦   ©À©¤©¤ user.js #ÓÃ»§Ïà¹Ø¿ØÖÆ²ã
-©À©¤©¤ package.json
-©À©¤©¤ public
-©¦   ©À©¤©¤ images
-©¦   ©À©¤©¤ javascripts
-©¦   ©¸©¤©¤ stylesheets
-©¦       ©¸©¤©¤ style.css
-©À©¤©¤ routes # Â·ÓÉ
-©¦   ©À©¤©¤ index.js 
-©¦   ©¸©¤©¤ users.js #ÓÃ»§Ïà¹ØÂ·ÓÉ
-©¸©¤©¤ views #ejsÄ£°å
-    ©À©¤©¤ error.ejs
-    +©À©¤©¤ fail.ejs #ÇëÇóÊ§°ÜµÄÄ£°å
-    +©À©¤©¤ success.ejs #ÇëÇó³É¹¦µÄÄ£°å
-    ©À©¤©¤ index.ejs
-    ©¸©¤©¤ layout.ejs
+â”œâ”€â”€ app.js
+â”œâ”€â”€ bin
+â”‚   â””â”€â”€ www
++â”œâ”€â”€ common #é¡¹ç›®å…¬ç”¨æ–‡ä»¶ï¼Œsqlé…ç½®æ–‡ä»¶ä»¥åŠä¸€äº›å…¬ç”¨æ–¹æ³•ã€‚
++â”‚   â”œâ”€â”€ config.js #æ•°æ®åº“é…ç½®æ–‡ä»¶
++â”‚   â”œâ”€â”€ sql.js #è¿æ¥æ•°æ®åº“
++â”‚   â””â”€â”€ utils.js #å…¬ç”¨æ–¹æ³•
++â”œâ”€â”€ controllers #æ§åˆ¶å±‚ï¼Œè¿æ¥æ•°æ®æ¨¡å‹ä¸è·¯ç”±å±‚
++â”‚   â”œâ”€â”€ user.js #ç”¨æˆ·ç›¸å…³æ§åˆ¶å±‚
+â”œâ”€â”€ package.json
+â”œâ”€â”€ public
+â”‚   â”œâ”€â”€ images
+â”‚   â”œâ”€â”€ javascripts
+â”‚   â””â”€â”€ stylesheets
+â”‚       â””â”€â”€ style.css
+â”œâ”€â”€ routes # è·¯ç”±
+â”‚   â”œâ”€â”€ index.js 
+â”‚   â””â”€â”€ users.js #ç”¨æˆ·ç›¸å…³è·¯ç”±
+â””â”€â”€ views #ejsæ¨¡æ¿
+    â”œâ”€â”€ error.ejs
+    +â”œâ”€â”€ fail.ejs #è¯·æ±‚å¤±è´¥çš„æ¨¡æ¿
+    +â”œâ”€â”€ success.ejs #è¯·æ±‚æˆåŠŸçš„æ¨¡æ¿
+    â”œâ”€â”€ index.ejs
+    â””â”€â”€ layout.ejs

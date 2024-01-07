@@ -29,7 +29,7 @@
         <a-form-item
           :name="['user', 'name']"
           label="Name"
-          :rules="[{ required: true }]"
+          :rules="[{ required: true, whitespace:true }]"
         >
           <a-input v-model:value="formState.user.name">
             <template #suffix>
@@ -84,6 +84,7 @@
           v-if="formState.user.SubmitToTimeline"
           :name="['user', 'publishDate']"
           label="Publish Date"
+          :rules="[{ required: true,date: true }]"
         >
           <a-date-picker
             v-if="formState.user.SubmitToTimeline"
@@ -231,11 +232,13 @@ const validateMessages = {
   required: "${label} is required!",
   types: {
     email: "${label} is not a valid email!",
-    number: "${label} is not a valid number!",
   },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
+  date: {
+    format: "'${name}' is invalid for format date",
+    parse: "'${name}' could not be parsed as date",
+    invalid: "'${name}' is invalid date",
   },
+  whitespace: "Name cannot be empty"
 };
 const formState = reactive({
   user: {
@@ -256,9 +259,9 @@ const handleChange = (info) => {
   console.log(info);
   const status = info.file.status;
   // info
-  if (status !== "uploading") {
-    // console.log(info.file, info.fileList);
-  }
+  // if (status !== "uploading") {
+  //   // console.log(info.file, info.fileList);
+  // }
   if (status === "done") {
     console.log(info);
     // Callback on Success
@@ -296,7 +299,7 @@ const beforeUpload = (file) => {
   }
 
   console.log(valideFileType || isSmallerThanLimit);
-  //问题：限制上传数量
+  //限制上传数量
   // console.log(fileList.value.length);
   if (fileList.value.length >= 3) {
     message.error(`${file.name} upload failed, Maximum 3 file`);

@@ -3,7 +3,7 @@
       <section class="time-axis container">
         <div
           class="time-axis-container"
-          :style="{ width: timeArr1.length * (170 + 20) + 'px',
+          :style="{ width: timeArr1.length * (180 + 20) + 'px',
           transform: 'translateX('+positionX+'px)'}"
         >
           <div
@@ -22,7 +22,7 @@
             <VueDragResizeRotate
               :key="1"
               :id="1"
-              :w="( timeArr.length -1) * (170 + 40)"
+              :w="( timeArr.length -1) * (175 + 40)"
               :h="80"
               :resizable="false"
               axis="x"
@@ -31,7 +31,7 @@
             >
               <div
                 class="relative"
-                :style="{ width:( timeArr.length -1) * (170 + 40) + 'px' }"
+                :style="{ width:( timeArr.length -1) * (180 + 40) + 'px' }"
               >
                 <div
                   class="item"
@@ -48,7 +48,7 @@
           :key="2"
           :id="2"
           :parent="true"
-          :w="'100%'"
+          :w="180"
           :h="111"
           style="top: 0;opacity: 0.5;"
           :drag-handle="'.drag-text'"
@@ -115,7 +115,7 @@
   const onDragStopf = (x, y) => {
     positionf.value.x = -(x);
     console.log(position.value.x)
-    const thumbnailToLargeRatio = 1100 / 170;
+    const thumbnailToLargeRatio = 1100 / 180;
     // 根据拖动的方向调整大图的位置
     positionX.value = -((-(x) + position.value.x1) * thumbnailToLargeRatio);
     emit("changePosition", {x:(-(x) + position.value.x1),y:position.value});
@@ -135,7 +135,8 @@
     padding: 0 10px;
   }
   .time-axis .time-axis-container .item {
-    width: 170px;
+    /* width: 180px; Edit elements width in mid-timeline*/
+    min-width: 220px;
     background-color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -175,12 +176,12 @@
     top: 0;
   }
   .time-z .drag .bg {
-    width: 170px;
+    width: 180px;
     height: 80px;
     background-color: #8bb4b9c2;
   }
   .time-z .drag .text {
-    width: 170px;
+    width: 180px;
     padding: 5px 0;
     background-color: #595959;
     text-align: center;
@@ -194,7 +195,8 @@
     z-index: 99;
   }
   .time-z .time-z-container .item {
-    width: 170px;
+    width: 180px;
+    /* min-width: 220px; edit elements width in timeline*/
     height: 80px;
     text-align: center;
     padding-top: 10px;

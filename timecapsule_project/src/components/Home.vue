@@ -1,79 +1,353 @@
 <template>
   <main>
-    <section class="container" style="overflow: hidden;">
-    <div class="timeContentPar">
-      <div class="box" :style="{transform: 'translateX('+position+'px)'}">
-        <div class="timeContent">
-          <div class="item type1">
-            <div class="img">
-              <img src="../assets/Timeline/history_1937.jpg" width="100%" alt="">
-            </div>
-            <div class="text">
-              <p class="title">香港官立高级工业学院成立</p>
-              <p class="content">校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。</p>
-            </div>
-          </div>
-          <div class="item type2">
-            <div class="img">
-              <img src="../assets/Timeline/history_1947.jpg" width="100%" alt="">
-            </div>
-            <div class="text">
-              <p class="content">香港工业专门学院</p>
-            </div>
-            <div class="img">
-              <img src="../assets/Timeline/history_1947(1).jpg" width="100%" alt="">
-            </div>
-          </div>
-          <div class="item type3">
-            <div class="img">
-              <img src="../assets/Timeline/history_1994_1.jpg" width="100%" alt="">
+    <section class="container" style="overflow: hidden">
+      <div class="timeContentPar">
+        <div
+          class="box"
+          :style="{ transform: 'translateX(' + position + 'px)' }"
+        >
+          <div class="timeContent">
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
               <div class="text">
-                <p class="title">香港理工大学</p>
-                <p class="content">学院获大学及理工教育资助委员会颁授自我评审资格，正式取得大学地位，并正名为香港理工大学。</p>
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
               </div>
             </div>
-            <div class="img">
-              <img src="../assets/Timeline/history_1994_2.jpg" width="100%" alt="">
+            <div class="item type2">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1947.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
               <div class="text">
-                <p class="title">包玉刚图书馆</p>
-                <p class="content">1996年的包玉刚图书馆命名仪式</p>
+                <p class="content">香港工业专门学院</p>
+              </div>
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1947(1).jpg"
+                  width="100%"
+                  alt=""
+                />
               </div>
             </div>
-          </div>
-          <div class="item type3">
-            <div class="img">
-              <img src="../assets/Timeline/history_1994_3.jpg" width="100%" alt="">
-              <div class="text">
-                <p class="title">毕业季</p>
-                <p class="content">我们毕业啦</p>
+            <div class="item type3">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1994_1.jpg"
+                  width="100%"
+                  alt=""
+                />
+                <div class="text">
+                  <p class="title">香港理工大学</p>
+                  <p class="content">
+                    学院获大学及理工教育资助委员会颁授自我评审资格，正式取得大学地位，并正名为香港理工大学。
+                  </p>
+                </div>
+              </div>
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1994_2.jpg"
+                  width="100%"
+                  alt=""
+                />
+                <div class="text">
+                  <p class="title">包玉刚图书馆</p>
+                  <p class="content">1996年的包玉刚图书馆命名仪式</p>
+                </div>
               </div>
             </div>
-            <div class="text">
-              <p class="title">毕业快乐( •̀ ω •́ )</p>
-            </div>
-          </div>
-          <div class="item type3">
-            <div class="img">
-              <img src="../assets/Timeline/history_today_2.jpg" width="100%" alt="">
+            <div class="item type3">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1994_3.jpg"
+                  width="100%"
+                  alt=""
+                />
+                <div class="text">
+                  <p class="title">毕业季</p>
+                  <p class="content">我们毕业啦</p>
+                </div>
+              </div>
               <div class="text">
-                <p class="title">今天的香港理工大学</p>
-                <p class="content">虽然理大有八十年的悠长历史，但我们一直与时并进，致力应对现实生活问题，造福香港、国家和全世界。</p>
+                <p class="title">毕业快乐( •̀ ω •́ )</p>
               </div>
             </div>
+            <div class="item type3">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_today_2.jpg"
+                  width="100%"
+                  alt=""
+                />
+                <div class="text">
+                  <p class="title">今天的香港理工大学</p>
+                  <p class="content">
+                    虽然理大有八十年的悠长历史，但我们一直与时并进，致力应对现实生活问题，造福香港、国家和全世界。
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- // -->
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <div class="item type1">
+              <div class="img">
+                <img
+                  src="../assets/Timeline/history_1937.jpg"
+                  width="100%"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <p class="title">香港官立高级工业学院成立</p>
+                <p class="content">
+                  校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。
+                </p>
+              </div>
+            </div>
+            <!-- // -->
           </div>
         </div>
       </div>
-    </div>
-    <TimeAxis @changePosition = "changePosition" />
-  </section>
+      <TimeAxis @changePosition="changePosition" />
+    </section>
+    <div class="right">
+      <div class="rightImage-wrapper">
+        <img src="../assets/TimeCapsulePic/TimeCap2.png" alt="" width="100%" />
+        <div class="button">
+          
+          <a-button @click="goToLogin">Go to Login</a-button>
 
-    <a-button @click="goToLogin">Go to Login</a-button>
-    <a-button type="primary" @click="showModal">Write Your Capsule</a-button>
+          <a-button type="primary" @click="showModal"
+            >Write Your Capsule</a-button
+          >
+        </div>
+      </div>
+    </div>
     <a-modal
       ref="modalRef"
       v-model:open="open"
       :wrap-style="{ overflow: 'hidden' }"
-      width="1000px"
+      width="800px"
     >
       <template #footer>
         <a-button key="back" @click="handleCancel">Cancel</a-button>
@@ -96,7 +370,7 @@
         <a-form-item
           :name="['user', 'name']"
           label="Name"
-          :rules="[{ required: true, whitespace:true }]"
+          :rules="[{ required: true, whitespace: true }]"
         >
           <a-input v-model:value="formState.user.name">
             <template #suffix>
@@ -151,7 +425,7 @@
           v-if="formState.user.SubmitToTimeline"
           :name="['user', 'publishDate']"
           label="Publish Date"
-          :rules="[{ required: true,date: true }]"
+          :rules="[{ required: true, date: true }]"
         >
           <a-date-picker
             v-if="formState.user.SubmitToTimeline"
@@ -208,14 +482,14 @@ import {
 import { onKeyDown, useDraggable } from "@vueuse/core";
 import { uploadform } from "../api/writeTimecap";
 import { useRouter } from "vue-router";
-import TimeAxis from './TimeAxis.vue'
+import TimeAxis from "./TimeAxis.vue";
 //Timeline Module
-const position = ref(0)
+const position = ref(0);
 const changePosition = (e) => {
-  const thumbnailToLargeRatio =  930 / 170;
+  const thumbnailToLargeRatio = 930 / 170;
   // 根据拖动的方向调整大图的位置
   position.value = -(e.x * thumbnailToLargeRatio);
-}
+};
 //Dialog Module
 const open = ref(false);
 const modalTitleRef = ref(null);
@@ -312,7 +586,7 @@ const validateMessages = {
     parse: "'${name}' could not be parsed as date",
     invalid: "'${name}' is invalid date",
   },
-  whitespace: "Name cannot be empty"
+  whitespace: "Name cannot be empty",
 };
 const formState = reactive({
   user: {
@@ -401,37 +675,48 @@ const disabled = computed(() => {
 </script>
 
 <style scoped>
-*{
- 
+:root {
+  --mainpage-width: 1650px;
+  --timeline-width:1350px
 }
-main{
-  width: 1200px;
-  margin: 0 auto;
+main {
+  width: var(--mainpage-width);
+  /* margin: 0 auto; */
+  padding-left: 10px;
   display: flex;
   justify-content: space-between;
 }
-.container{
-  width: 930px;
+.container {
+  width: var(--timeline-width);
   padding: 0;
   box-sizing: border-box;
 }
-aside{
-  width: calc(1200px - 950px);
+.right {
+  /* width: calc(1650px - 950px); */
+  flex: 1;
+  min-width: 370px;
+  /* background-size: cover; */
 }
-aside button{
-  margin-top: 20px;
+.right .rightImage-wrapper {
+  position: relative;
+}
+.right .button {
+  position: absolute;
+  bottom: 10px; /* Adjust this value to position the button */
+  left: 120px; /* Adjust this value to position the button */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust this value for spacing between buttons */
+  
+  /* margin-top: 20px;
   width: 100px;
   height: 35px;
   border-radius: 5px;
-  background-color: #f2f2f2;
-  border: 1px solid #f2f2f2;
+ 
   font-size: 16px;
-  cursor: pointer;
+  cursor: pointer; */
 }
-aside button:hover{
-  background-color: #dddddd;
-  border: 1px solid #dddddd;
-}
+
 .timeline-options {
   display: flex;
   justify-content: flex-end; /* 保持内容在右侧 */
@@ -446,9 +731,9 @@ img {
   display: block;
   object-fit: cover;
 }
-.content{
+.content {
   text-wrap: wrap;
-  word-break:break-all;
+  word-break: break-all;
 }
 .container .timeContentPar {
   padding: 0 10px;
@@ -459,7 +744,7 @@ img {
   align-items: flex-end;
   background-image: url("../assets/TimelineBackground/TimelineBackground1.png");
 }
-.container .timeContentPar .box{
+.container .timeContentPar .box {
   display: flex;
 }
 .container .timeContent {
@@ -470,13 +755,15 @@ img {
 }
 
 .container .timeContent .item {
-  width: 170px;
+  /* min-width: 220px; */
+  width: 220px;
   color: #fff;
   padding-left: 15px;
 }
 
 .container .timeContent .type1 {
-  background-color: #738D78;
+  background-color: #738d78;
+  padding-left: 15px;
 }
 
 .container .timeContent .type1 .img {
@@ -490,7 +777,7 @@ img {
   padding-top: 5px;
 }
 
-.container .timeContent .type1>.text .title {
+.container .timeContent .type1 > .text .title {
   position: relative;
   left: -2px;
   background-color: #fff;
@@ -500,11 +787,11 @@ img {
   text-align: center;
   font-weight: 400;
   width: 100%;
-  border: 2px solid #70888F;
+  border: 2px solid #70888f;
   margin: 0 0;
 }
 
-.container .timeContent .type1>.text .content {
+.container .timeContent .type1 > .text .content {
   font-size: 13px;
   color: #000;
   line-height: 16px;
@@ -519,7 +806,7 @@ img {
 }
 
 .container .timeContent .type2 {
-  padding-left: 0;
+  padding-left: 0px;
 }
 
 .container .timeContent .type2 .img {
@@ -532,7 +819,7 @@ img {
 }
 
 .container .timeContent .type2 .text .content {
-  background-color: #BAA758;
+  background-color: #baa758;
   margin: 5px 0;
   font-size: 13px;
   padding: 10px;
@@ -540,7 +827,8 @@ img {
 
 .container .timeContent .type3 .img {
   padding-left: 10px;
-  background-color: #BCA854;
+  background-color: #bca854;
+  height: 200px;
   display: flex;
   margin-top: 10px;
 }
@@ -566,11 +854,11 @@ img {
   font-size: 13px;
   margin: 0;
 }
-.container .timeContent .type3>.text {
-  background-color: #BCA854;
+.container .timeContent .type3 > .text {
+  background-color: #bca854;
   padding-left: 10px;
 }
-.container .timeContent .type3>.text .title {
+.container .timeContent .type3 > .text .title {
   position: relative;
   left: -2px;
   background-color: #fff;
@@ -580,7 +868,7 @@ img {
   text-align: center;
   font-weight: 400;
   width: 100%;
-  border: 2px solid #70888F;
+  border: 2px solid #70888f;
   margin: 0 0;
 }
 </style>

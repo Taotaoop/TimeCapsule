@@ -1,42 +1,30 @@
 <template>
-  <div>
-    <div class="navbar">
-    <div class="navbar-left">
-      <img src="./assets/Logo.jpg" alt="Logo" class="logo"/>
-      <img src="./assets/LogoBanner.jpg" alt="Banner" class="banner"/>
-      
-    </div>
-    Header
-    <!-- 你可以继续在这里添加其他导航链接或元素 -->
-  </div>
-    
-    <router-view></router-view>
-  </div>
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
 
-<script>
-</script>
-
-<style scoped>
-.navbar {
-  display: flex;
-  align-items: center;
-  background-color: #ffffff;
-  color: white;
-  padding: 10px;
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 
-.navbar-left {
-  flex: 1;
+nav {
+  padding: 30px;
 }
 
-.logo {
-  width: 100px; /* 根据实际需要调整大小 */
-  height: auto;
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
 }
 
-.banner {
-  width: 300px; /* 根据实际需要调整大小 */
-  height: auto;
+nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

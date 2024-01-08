@@ -1,35 +1,38 @@
-
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from "@/components/Home.vue";
-import About from "@/components/About.vue";
-import Login from "@/components/Login.vue"
-import Signup from "@/components/Signup.vue"
+import HomeView from '../views/HomeView.vue'
+
 const routes = [
-      {
-        path: "/",
-        name: "Home",
-        component: Home,
-      },
-      {
-        path: "/about",
-        name: "About",
-        component: About,
-      },
-      {
-        path: "/login",
-        name: "Login",
-        component: Login,
-      },
-      {
-        path: "/signup",
-        name: "Signup",
-        component: Signup,
-      },
-    ];
+  {
+    path: "/",
+    name: "home",
+    component: HomeView,
+    meta: {
+      isLogin: true,
+    },
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/Login.vue"),
+    meta: {
+      isLogin: false,
+    },
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/Signup.vue"),
+    meta: {
+      isLogin: false,
+    },
+  },
+];
 
 const router = createRouter({
-    history:createWebHashHistory(),
-    routes,
+  history: createWebHashHistory(),
+  routes
 })
 
 export default router

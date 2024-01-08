@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
     // 如果已登录，进行登录注册页面，则定向会首页
     if (!to.meta.isLogin) {
       this.$message.error("请先退出登录");
-      next({ path: "/home" });
+      next({ path: "/" });
     }
     // 如果登录标志不存在，即未登录
   } else {

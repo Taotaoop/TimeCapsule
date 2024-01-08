@@ -89,11 +89,21 @@ const formState = reactive({
   password: "",
   remember: false,
 });
-
+const router = useRouter();
 // 提交表单
 const onFinish = (values) => {
   console.log("Success:", values);
   // 实现登录逻辑
+
+
+
+  // 设置Vuex登录标志位true， 默认userLogin位false
+			this.$store.dispatch("userLogin", true);
+			// Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5存储，我们设置一个名为Flag，职位isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了
+			localStorage.setItem("Flag", "isLogin");
+			this.$message.success(res.data.message);
+			// 登录成功后跳转到指定页面
+			router.push("/home");
 };
 
 // 提交失败
@@ -101,9 +111,9 @@ const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
   // 可以在这里显示一些错误信息
 };
-const router = useRouter();
+
 function goToSignup(){
-  router.push({ name: "Signup"});
+  router.push({ name: "signup"});
 }
 // Sign up Module
 </script>

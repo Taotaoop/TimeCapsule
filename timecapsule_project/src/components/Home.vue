@@ -1,5 +1,72 @@
 <template>
-  <div>
+  <main>
+    <section class="container" style="overflow: hidden;">
+    <div class="timeContentPar">
+      <div class="box" :style="{transform: 'translateX('+position+'px)'}">
+        <div class="timeContent">
+          <div class="item type1">
+            <div class="img">
+              <img src="../assets/Timeline/history_1937.jpg" width="100%" alt="">
+            </div>
+            <div class="text">
+              <p class="title">香港官立高级工业学院成立</p>
+              <p class="content">校舍位于湾仔活道，是本校最早的前身，也是香港第一所由政府资助，提供专上程度工科教育的院校。</p>
+            </div>
+          </div>
+          <div class="item type2">
+            <div class="img">
+              <img src="../assets/Timeline/history_1947.jpg" width="100%" alt="">
+            </div>
+            <div class="text">
+              <p class="content">香港工业专门学院</p>
+            </div>
+            <div class="img">
+              <img src="../assets/Timeline/history_1947(1).jpg" width="100%" alt="">
+            </div>
+          </div>
+          <div class="item type3">
+            <div class="img">
+              <img src="../assets/Timeline/history_1994_1.jpg" width="100%" alt="">
+              <div class="text">
+                <p class="title">香港理工大学</p>
+                <p class="content">学院获大学及理工教育资助委员会颁授自我评审资格，正式取得大学地位，并正名为香港理工大学。</p>
+              </div>
+            </div>
+            <div class="img">
+              <img src="../assets/Timeline/history_1994_2.jpg" width="100%" alt="">
+              <div class="text">
+                <p class="title">包玉刚图书馆</p>
+                <p class="content">1996年的包玉刚图书馆命名仪式</p>
+              </div>
+            </div>
+          </div>
+          <div class="item type3">
+            <div class="img">
+              <img src="../assets/Timeline/history_1994_3.jpg" width="100%" alt="">
+              <div class="text">
+                <p class="title">毕业季</p>
+                <p class="content">我们毕业啦</p>
+              </div>
+            </div>
+            <div class="text">
+              <p class="title">毕业快乐( •̀ ω •́ )</p>
+            </div>
+          </div>
+          <div class="item type3">
+            <div class="img">
+              <img src="../assets/Timeline/history_today_2.jpg" width="100%" alt="">
+              <div class="text">
+                <p class="title">今天的香港理工大学</p>
+                <p class="content">虽然理大有八十年的悠长历史，但我们一直与时并进，致力应对现实生活问题，造福香港、国家和全世界。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <TimeAxis @changePosition = "changePosition" />
+  </section>
+
     <a-button @click="goToLogin">Go to Login</a-button>
     <a-button type="primary" @click="showModal">Write Your Capsule</a-button>
     <a-modal
@@ -127,7 +194,7 @@
         </div>
       </template>
     </a-modal>
-  </div>
+  </main>
 </template>
 
 <script setup>
@@ -139,9 +206,16 @@ import {
   QuestionCircleOutlined,
 } from "@ant-design/icons-vue";
 import { onKeyDown, useDraggable } from "@vueuse/core";
-import axios from "axios";
 import { uploadform } from "../api/writeTimecap";
 import { useRouter } from "vue-router";
+import TimeAxis from './TimeAxis.vue'
+//Timeline Module
+const position = ref(0)
+const changePosition = (e) => {
+  const thumbnailToLargeRatio =  930 / 170;
+  // 根据拖动的方向调整大图的位置
+  position.value = -(e.x * thumbnailToLargeRatio);
+}
 //Dialog Module
 const open = ref(false);
 const modalTitleRef = ref(null);
@@ -327,6 +401,37 @@ const disabled = computed(() => {
 </script>
 
 <style scoped>
+*{
+ 
+}
+main{
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.container{
+  width: 930px;
+  padding: 0;
+  box-sizing: border-box;
+}
+aside{
+  width: calc(1200px - 950px);
+}
+aside button{
+  margin-top: 20px;
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  border: 1px solid #f2f2f2;
+  font-size: 16px;
+  cursor: pointer;
+}
+aside button:hover{
+  background-color: #dddddd;
+  border: 1px solid #dddddd;
+}
 .timeline-options {
   display: flex;
   justify-content: flex-end; /* 保持内容在右侧 */
@@ -334,5 +439,148 @@ const disabled = computed(() => {
 
 .timeline-controls {
   display: flex;
+}
+
+/* Timeline style */
+img {
+  display: block;
+  object-fit: cover;
+}
+.content{
+  text-wrap: wrap;
+  word-break:break-all;
+}
+.container .timeContentPar {
+  padding: 0 10px;
+  width: 100%;
+  height: 500px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: flex-end;
+  background-image: url("../assets/TimelineBackground/TimelineBackground1.png");
+}
+.container .timeContentPar .box{
+  display: flex;
+}
+.container .timeContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.container .timeContent .item {
+  width: 170px;
+  color: #fff;
+  padding-left: 15px;
+}
+
+.container .timeContent .type1 {
+  background-color: #738D78;
+}
+
+.container .timeContent .type1 .img {
+  width: 100%;
+  background-color: #fff;
+  margin: 0;
+}
+
+.container .timeContent .type1 .text {
+  background-color: #fff;
+  padding-top: 5px;
+}
+
+.container .timeContent .type1>.text .title {
+  position: relative;
+  left: -2px;
+  background-color: #fff;
+  font-size: 17px;
+  padding: 6px;
+  color: #000;
+  text-align: center;
+  font-weight: 400;
+  width: 100%;
+  border: 2px solid #70888F;
+  margin: 0 0;
+}
+
+.container .timeContent .type1>.text .content {
+  font-size: 13px;
+  color: #000;
+  line-height: 16px;
+  margin: 0px;
+  padding: 10px;
+  padding-bottom: 20px;
+  padding-top: 5px;
+}
+
+.container .timeContent .item:not(:last-child) {
+  margin-right: 15px;
+}
+
+.container .timeContent .type2 {
+  padding-left: 0;
+}
+
+.container .timeContent .type2 .img {
+  background-color: #894060;
+  padding-left: 10px;
+}
+
+.container .timeContent .type2 .img img {
+  display: block;
+}
+
+.container .timeContent .type2 .text .content {
+  background-color: #BAA758;
+  margin: 5px 0;
+  font-size: 13px;
+  padding: 10px;
+}
+
+.container .timeContent .type3 .img {
+  padding-left: 10px;
+  background-color: #BCA854;
+  display: flex;
+  margin-top: 10px;
+}
+
+.container .timeContent .type3 .img img {
+  width: 50%;
+}
+
+.container .timeContent .type3 .img .text {
+  width: 50%;
+  background-color: #fff;
+  color: #000;
+  padding: 5px 10px;
+}
+
+.container .timeContent .type3 .img .text .title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.container .timeContent .type3 .img .text .content {
+  font-size: 13px;
+  margin: 0;
+}
+.container .timeContent .type3>.text {
+  background-color: #BCA854;
+  padding-left: 10px;
+}
+.container .timeContent .type3>.text .title {
+  position: relative;
+  left: -2px;
+  background-color: #fff;
+  font-size: 17px;
+  padding: 6px;
+  color: #000;
+  text-align: center;
+  font-weight: 400;
+  width: 100%;
+  border: 2px solid #70888F;
+  margin: 0 0;
 }
 </style>

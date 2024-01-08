@@ -1,9 +1,15 @@
 <template>
   <div>
-    <ul>
-      <!-- <li><router-link to ="/">Home</router-link></li> -->
-    </ul>
+    <div class="navbar">
+    <div class="navbar-left">
+      <img src="./assets/Logo.jpg" alt="Logo" class="logo"/>
+      <img src="./assets/LogoBanner.jpg" alt="Banner" class="banner"/>
+      
+    </div>
     Header
+    <!-- 你可以继续在这里添加其他导航链接或元素 -->
+  </div>
+    
     <router-view></router-view>
   </div>
 </template>
@@ -11,16 +17,26 @@
 <script>
 </script>
 
-<style>
-#app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; */
+<style scoped>
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  color: white;
+  padding: 10px;
 }
-#H{
 
+.navbar-left {
+  flex: 1;
+}
+
+.logo {
+  width: 100px; /* 根据实际需要调整大小 */
+  height: auto;
+}
+
+.banner {
+  width: 300px; /* 根据实际需要调整大小 */
+  height: auto;
 }
 </style>

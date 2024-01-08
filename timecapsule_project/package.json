@@ -9,11 +9,14 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@braks/revue-draggable": "^0.4.3",
+    "@gausszhou/vue3-drag-resize-rotate": "^3.0.2",
     "@vueuse/core": "^10.7.1",
     "ant-design-vue": "^4.0.8",
     "axios": "^1.6.3",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
+    "vue-dragscroll": "^4.0.5",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

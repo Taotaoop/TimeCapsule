@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main style="height: calc(100vh - 90px);">
     <section class="container" style="overflow: hidden">
       <div class="timeContentPar">
         <div
@@ -98,7 +98,7 @@
                 </div>
               </div>
             </div>
-            <!-- // -->
+            <!-- //test start -->
             <div class="item type1">
               <div class="img">
                 <img
@@ -324,18 +324,17 @@
                 </p>
               </div>
             </div>
-            <!-- // -->
+            <!-- //test end -->
           </div>
         </div>
       </div>
       <TimeAxis @changePosition="changePosition" />
     </section>
-    <div class="right">
-      <div class="rightImage-wrapper">
-        <img src="../assets/TimeCapsulePic/TimeCap2.png" alt="" width="100%" />
+    <div class="right" style="height: 100%;">
+      <div class="rightImage-wrapper" style="height: 100%;">
+        <img style="height: calc(100% - 30px)" src="../assets/TimeCapsulePic/TimeCap2.png" alt="" width="100%" />
         <div class="button">
-          
-          <a-button @click="goToLogin">Go to Login</a-button>
+          <!-- <a-button @click="goToLogin">Go to Login</a-button> -->
 
           <a-button type="primary" @click="showModal"
             >Write Your Capsule</a-button
@@ -343,6 +342,9 @@
         </div>
       </div>
     </div>
+    <a-modal v-model:open="resultModalOpen" title="Submission Result">
+      <p>{{ submissionResult }}</p>
+    </a-modal>
     <a-modal
       ref="modalRef"
       v-model:open="open"
@@ -483,10 +485,11 @@ import { onKeyDown, useDraggable } from "@vueuse/core";
 import { uploadform } from "../api/writeTimecap";
 import { useRouter } from "vue-router";
 import TimeAxis from "./TimeAxis.vue";
+
 //Timeline Module
 const position = ref(0);
 const changePosition = (e) => {
-  const thumbnailToLargeRatio = 930 / 170;
+  const thumbnailToLargeRatio = 1350 / 220;
   // 根据拖动的方向调整大图的位置
   position.value = -(e.x * thumbnailToLargeRatio);
 };
@@ -501,7 +504,7 @@ const formRef = ref();
 const handleOk = (e) => {
   formRef.value
     .validate()
-    .then((formData) => {
+    .then(async (formData) => {
       const data = {
         ...formData,
         fileList: fileList.value.map((item) => item.response),
@@ -510,7 +513,14 @@ const handleOk = (e) => {
       // Clear form data before cancel
       formRef.value.resetFields();
       open.value = false;
-      return uploadform(data);
+      const response = await uploadform(data);
+      console.log(response);
+      if(response.status == 200){
+        message.success(response.data.message);
+      }else{
+        message.error("Upload failed")
+      }
+      
     })
     .catch(console.log);
 };
@@ -658,6 +668,7 @@ const beforeUpload = (file) => {
 };
 //调试
 const onFinish = (values) => {
+  console.log("in finish");
   console.log("Success:", values);
 };
 const onFinishFailed = (errorInfo) => {
@@ -677,11 +688,11 @@ const disabled = computed(() => {
 <style scoped>
 :root {
   --mainpage-width: 1650px;
-  --timeline-width:1350px
+  --timeline-width: 1350px;
 }
 main {
   width: var(--mainpage-width);
-  /* margin: 0 auto; */
+  margin: 0 auto;
   padding-left: 10px;
   display: flex;
   justify-content: space-between;
@@ -690,6 +701,9 @@ main {
   width: var(--timeline-width);
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .right {
   /* width: calc(1650px - 950px); */
@@ -707,7 +721,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px; /* Adjust this value for spacing between buttons */
-  
+
   /* margin-top: 20px;
   width: 100px;
   height: 35px;
@@ -736,6 +750,7 @@ img {
   word-break: break-all;
 }
 .container .timeContentPar {
+  flex: 1;
   padding: 0 10px;
   width: 100%;
   height: 500px;

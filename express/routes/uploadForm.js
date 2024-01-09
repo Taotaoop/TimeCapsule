@@ -4,7 +4,7 @@ var router = express.Router();
 //上传表单
 router.post("/uploadform", function (req, res) {
   
-  
+
   if (req.body.fileList.length > 0) {
     req.body.fileList.forEach((element) => {
       var storeData =
@@ -20,7 +20,7 @@ router.post("/uploadform", function (req, res) {
         if (err) {
           res.send(err);
         } else {
-          res.send(user);
+          res.send({code:200,message:"Upload Successful"});
         }
       });
     });
@@ -38,7 +38,7 @@ router.post("/uploadform", function (req, res) {
       if (err) {
         res.send(err);
       } else {
-        res.send(user);
+        res.send({code:200,message:"Upload Successful"});
       }
     });
   }

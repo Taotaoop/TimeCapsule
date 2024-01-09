@@ -16,7 +16,7 @@
         </div>
       </section>
   
-      <section class="time-z container" style="height: 111px">
+      <section class="time-z container" style="height: 110px">
         <div style="height: 80px">
           <div class="time-z-container">
             <VueDragResizeRotate
@@ -49,7 +49,7 @@
           :id="2"
           :parent="true"
           :w="180"
-          :h="111"
+          :h="110"
           style="top: 0;opacity: 0.5;"
           :drag-handle="'.drag-text'"
           :resizable="false"
@@ -100,7 +100,7 @@
     position.value.x = positionf.value.x + x;
     position.value.x1 = x;
     console.log(position.value.x)
-    const thumbnailToLargeRatio = 930 / 170;
+    const thumbnailToLargeRatio = 1350 / 220;
     // 根据拖动的方向调整大图的位置
     positionX.value = -(position.value.x * thumbnailToLargeRatio);
     emit("changePosition", position.value);
@@ -115,7 +115,7 @@
   const onDragStopf = (x, y) => {
     positionf.value.x = -(x);
     console.log(position.value.x)
-    const thumbnailToLargeRatio = 1100 / 180;
+    const thumbnailToLargeRatio = 1350 / 220;
     // 根据拖动的方向调整大图的位置
     positionX.value = -((-(x) + position.value.x1) * thumbnailToLargeRatio);
     emit("changePosition", {x:(-(x) + position.value.x1),y:position.value});
@@ -204,8 +204,11 @@
   .time-z .time-z-container .item:not(:last-child) {
     border-right: 1px dotted #ddd;
   }
-  .VueDragResizeRotate{
+  /* .VueDragResizeRotate{
   
+  } */
+  .toll {
+    flex: 0;
   }
   </style>
   
